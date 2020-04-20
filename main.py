@@ -36,6 +36,17 @@ class Player:
         
         print(self._canmove, end=' ')
         print(self._ammo)
+    
+    def helpIns(self):
+        print("Enter w to move up")
+        print("Enter s to move down")
+        print("Enter d to move right")
+        print("Enter a to move left")
+        print("Enter shoot w to shoot up")
+        print("Enter shoot s to shoot down")
+        print("Enter shoot d to shoot right")
+        print("Enter shoot a to shoot left")
+        print("Enter backpack to show your status")
         
     def shootU(self, graph, players):
         if self._ammo > 0:
@@ -352,8 +363,7 @@ def DFSwithoutTP(corr, form, graph):
         s = stack[-1]  
         stack.pop() 
         
-        if graph[s[0]][s[1]]._cellType == "E"
-        or graph[s[0]][s[1]]._cellType == "T":
+        if graph[s[0]][s[1]]._cellType == "E" or graph[s[0]][s[1]]._cellType == "T":
             canExit = 1
             return canExit
 
@@ -387,19 +397,14 @@ def play(actualMaze, players):
             if(players[i]._canmove == 0):
                 print("Player " + str(i + 1) + " - your turn")
                 command = ""
-                while command != "w" and command != "s" and command != "d"
-                and command != "a" and command != "shoot w"
-                and command != "shoot d" and command != "shoot s"
-                and command != "shoot a":
+                while command != "w" and command != "s" and command != "d" and command != "a" and command != "shoot w" and command != "shoot d" and command != "shoot s" and command != "shoot a":
                     command = input()
                     if command == "w":
-                        if actualMaze[players[i]._x]
-                        [players[i]._y]._cellType == "E":
+                        if actualMaze[players[i]._x][players[i]._y]._cellType == "E":
                             if(commToExit == "w"):
                                 return i
                         
-                        if actualMaze[players[i]._x]
-                        [players[i]._y]._moveableU == 0:
+                        if actualMaze[players[i]._x][players[i]._y]._moveableU == 0:
         
                             players[i].set_corr(players[i]._x - 1, players[i]._y)
                             print("You moved 1 cell up")
@@ -479,6 +484,8 @@ def play(actualMaze, players):
                         players[i].shootR(actualMaze, players)
                     elif command == "shoot a":
                         players[i].shootL(actualMaze,players)
+                    elif command == "help":
+                        players[i].helpIns()
                     else:
                         print("Enter a valid command")
             else:
